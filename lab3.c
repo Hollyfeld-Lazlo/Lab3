@@ -17,6 +17,10 @@ void allocate(int newSize){
 		printf("allocated while: %d, size while: %d  \n",(*(p+1) & 1), (*(p+1) & -2));
 		p = p + 2 + (*(p+1) & -2);
 	}
+	if(p >= head+126){
+		printf("Heap is Full...\n");
+		return;
+	}
 	int newBlockSize = ((newSize +1) >> 1) << 1;
 	int oldSize = *(p+1) & -2;
 	*(p+1) = newBlockSize | 1;
@@ -57,7 +61,7 @@ void writeHeap(int targetBlock, char payload, int mult){
 }
 
 void printHeap(int targetBlock, int mult){
-	char *p = head;
+	char *p = head;						
 	char *end = (p+127);
 	int i;
 	printf("targetblock: %d, mult: %d", targetBlock, mult);
@@ -68,11 +72,20 @@ void printHeap(int targetBlock, int mult){
 	for(i = 0; i < mult; ++i){
 		printf("%c", *(p+2+i));
 	}
-	printf("\n");
+	printf("\n");						
 }
 
-void printHeader(){
-
+void printHeader(int targetBlock){
+	char *p = head;						
+	char *end = (p+127);
+	int i;
+	printf("targetblock: %d", targetBlock);
+	while((p < end) && (*p != targetBlock)){
+		printf("block id: %d \n", *p);
+		p = p + 2 + (*(p+1) & -2);
+	}
+	printf("%02x%02x\n", *p, *(p+1));
+	printf("\n");						
 }
 
 void quit(){
@@ -141,7 +154,7 @@ void processResponse(char response[MAXINPUTSIZE]){
         }
 	else if(!strcmp(commandTitle, "printheader")){
 		if(count == 2){
-        		
+        		printHeader(args[0]);	
         	}
         	else{
         		printf("Improper use of %s...\n", commandTitle);
