@@ -79,6 +79,15 @@ void quit(){
 	exit(0);
 }
 
+/*void parseResponse(char response[MAXINPUTSIZE]){
+	char delim[] = " ";
+	char *token;
+
+	for (token = strtok(response, delim); token; token = (NULL, delim)){
+		
+	}
+}*/
+
 void processResponse(char response[MAXINPUTSIZE]){
 	int count, i, j;
 	int args[4];
