@@ -12,7 +12,7 @@ void allocate(int newSize){
 	char *p = head;
 	char *end = (p+127);
 	printf("newsize: %d \n", newSize);
-	printf("address of p : %d , address of end: %d , %d \n", p, end, *p);
+	printf("address of p : %p , address of end: %p , %d \n", &p, end, *p);
 	while((p < end) && ((*(p+1) & 1) || (*(p+1) & -2 <= (newSize+1)))){
 		printf("allocated while: %d, size while: %d  \n",(*(p+1) & 1), (*(p+1) & -2));
 		p = p + 2 + (*(p+1) & -2);
