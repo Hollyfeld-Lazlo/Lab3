@@ -50,7 +50,7 @@ void writeHeap(int targetBlock, char payload, int mult){
 	char *p = head;
 	char *end = (p+127);
 	int i;
-	printf("payload: %c, mult: %d", (char)payload, mult);
+	printf("payload: %c, mult: %d\n", (char)payload, mult);
 	while((p < end) && (*p != targetBlock)){
 		printf("block id: %d \n", *p);
 		p = p + 2 + (*(p+1) & -2);
@@ -64,7 +64,7 @@ void printHeap(int targetBlock, int mult){
 	char *p = head;						
 	char *end = (p+127);
 	int i;
-	printf("targetblock: %d, mult: %d", targetBlock, mult);
+	printf("targetblock: %d, mult: %d\n", targetBlock, mult);
 	while((p < end) && (*p != targetBlock)){
 		printf("block id: %d \n", *p);
 		p = p + 2 + (*(p+1) & -2);
@@ -91,15 +91,6 @@ void printHeader(int targetBlock){
 void quit(){
 	exit(0);
 }
-
-/*void parseResponse(char response[MAXINPUTSIZE]){
-	char delim[] = " ";
-	char *token;
-
-	for (token = strtok(response, delim); token; token = (NULL, delim)){
-		
-	}
-}*/
 
 void processResponse(char response[MAXINPUTSIZE]){
 	int count, i, j;
