@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXINPUTSIZE 64
+#define MAXINPUTSIZE 126
+#define INITIAL_SIZE 128
 #define NUMCOMMANDS 4
 
 unsigned char * head;
+unsigned char * end;
 int blockId;
 
 void allocate(int newSize){
 	char *p = head;
-	char *end = (p+127);
 	printf("newsize: %d \n", newSize);
 	printf("address of p : %d , address of end: %d , %d \n", p, end, *p);
 	while((p < end) && ((*(p+1) & 1) || (*(p+1) & -2 <= (newSize+1)))){
@@ -172,9 +173,10 @@ void processResponse(char response[MAXINPUTSIZE]){
 int main(int argc, char* argv[]){
 	blockId = 0;
 	char response[MAXINPUTSIZE];
-	head = malloc(128);
+	head = malloc(INITIAL_SIZE);
 	*head = blockId;
-	*(head+1) = 126;
+	end = head + 127;
+	*(head+1) = INITIAL_SIZE;
 	
 	
 	while(1){
