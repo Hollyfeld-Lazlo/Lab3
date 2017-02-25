@@ -57,13 +57,13 @@ void allocate(int newSize){
                	*(p+1) = newBlockSize | 1;				
 		*(p+newSize+2) = 0;
 		*(p+newSize+3) = ((oldSize - newSize - 2)<<1);
-		printf("%d %d\n", blockId, *p);
+		printf("%d\n", *p);
 	}
 	else{
 		*p = blockId++;				
                	//printf("blockid: %d\n", blockId);
                	*(p+1) = newBlockSize | 1;		
-		printf("%d %d\n", blockId,*p);
+		printf("%d\n", *p);
 	}
 	//printf("Allocate Success:: newBlockId: %d, newSize: %d, oldSize: %d, : %d  \n", *(p+newSize+2), newSize, oldSize, *(p+newBlockSize+1));
 	//printf("Allocate Success:: newBlockSize: %d, *P+newSize+3: %d \n", *(p+newSize+2), *(p+newSize+3));
