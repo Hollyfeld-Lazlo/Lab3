@@ -104,9 +104,13 @@ void writeHeap(int targetBlock, char payload, int mult){
 	int i;
 	//printf("writeheap :: payload: %c, mult: %d \n", payload, mult);
 	while((p < end) && (*p != targetBlock)){
-		printf("block id: %d \n", *p);
+		//printf("block id: %d \n", *p);
 		//p = p + 2 + (*(p+1) & -2);
 		p = p + 2 + ((*(p+1) & -2) >> 1);
+	}
+	if(mult > ((*(p+1) & -2) >> 1)){
+		printf("Write too Big\n");
+		return;
 	}
 	p+=2;
 	for(i = 0; i < mult; ++i){
@@ -128,6 +132,7 @@ void printHeap(int targetBlock, int mult){
 	for(i = 0; i < mult; ++i){
 		printf("%c ", *(p+i));
 	}
+	printf("\n");
 	//printf("\nend printheap\n");						
 }
 
@@ -257,7 +262,7 @@ int main(int argc, char* argv[]){
 	while(1){
 		printf("> ");
 		if(fgets(response, MAXINPUTSIZE, stdin)!=NULL){
-			printf("Your response: %s", response);
+			//printf("Your response: %s", response);
 			processResponse(response);
 		}
 		else{
